@@ -40,14 +40,14 @@ async def switch(device):
 
 @app.get("/v1/{device}/status", status_code=200)
 async def online(device):
-	settings, surl, sip = oe.init(device)
+	settings, settings_url, settings_ip = oe.switch(device)
 
-	if oe.is_online() and device.isnumeric():
-		logging.info(f"[i] Status of radio@{ip}: online")
-		return '{"result": 200, "status": "online", "ipaddr": ' + str(sip)  + '}'
+	if oe.is_online(settings_ip) and device.isnumeric():
+		logging.info(f"[i] Status of radio@{settings_ip}: online")
+		return '{"result": 200, "status": "online", "ipaddr": ' + str(settings_ip)  + '}'
 	else:
-		logging.info(f"[i] Status of radio@{ip}: offline")
-		return '{"result": 400, "status": "offline, "ipaddr": ' + str(sip)  + '}'
+		logging.info(f"[i] Status of radio@{settings_ip}: offline")
+		return '{"result": 400, "status": "offline", "ipaddr": ' + str(settings_ip)  + '}'
 
 
 @app.get("/v1/{device}/playing", status_code=200)
@@ -467,7 +467,7 @@ async def search(keywords):
 
 def main():
 	global ip
-	settings, stations = oe.init("192.168.2.20")
+	settings, stations = oe.init("192.168.0.211")
 	ip = settings["ipaddress"]
 
 	print("main")

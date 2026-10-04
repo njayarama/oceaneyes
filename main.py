@@ -81,7 +81,7 @@ def api():
 	if import_safe("uvicorn", "0.22.0"):
 		logging.info("[i] Starting FastAPI as background task")
 		try:
-			os.system(f"{dir_home}/python-apps/oceaneyes/bin/uvicorn api:app --host {sip} --port 1929")
+			os.system(f"{dir_home}/git/radio/oceaneyes/.oceaneyes/bin/uvicorn api:app --host {sip} --port 1929")
 		except:
 			subprocess.check_output(['kill -9 $(ps aux | grep -i "port 1929" | head -n1 | cut -d " " -f8)'])
 			print("[!] Did not start API server")

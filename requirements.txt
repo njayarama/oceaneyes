@@ -1,7 +1,10 @@
-asyncio==3.4.3
+requests
+# asyncio is part of the Python standard library, not a PyPI package
+#asyncio==3.4.3
 uvicorn==0.22.0
 fastapi==0.97.0
-PyAudio==0.2.13
+# PyAudio 0.2.13 fails to build on Python 3.13 and is not imported anywhere in the code
+#PyAudio==0.2.13
 pyradios==1.0.2
 python-vlc==3.0.18122
 tinydb==4.8.0

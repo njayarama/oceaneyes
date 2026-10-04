@@ -1,0 +1,29 @@
+# favsync example manifest
+# Format: favid, Station Name, Stream URL [, country [, genre]]
+# Add/replace:  "favid, name, url, country, genre"   (replaces the station at that preset if occupied)
+# Delete:       "-favid"
+# '#' = comment, blank lines ignored, fields comma separated.
+#
+# Current device state: first N slots are occupied (check with fav/engaged or oe.get_total),
+# slots beyond the last-used slot are free. Add to a free slot to append, or to an occupied slot to replace.
+# Country/genre can be human text or raw Skytune codes:
+#   text  -> "United Kingdom" / "Jazz"     (looked up in OceanEyes code tables)
+#   codes -> "3;17;-1" / "2;21"            (passed straight through)
+
+# --- ADD/RESTORE examples -------------------------------------------
+# Put a station at a free slot (14+):
+14,Radio Paradise Global,https://stream.radioparadise.com/global-320,United Kingdom,Variety
+
+# Replace an existing preset (e.g. slot 5 is currently 101 SMOOTH JAZZ):
+5,My New Station,https://example.com/stream.mp3,United Kingdom,Pop
+
+# Restore MusOpen (was removed as not working - check live again before committing)
+#17,MusOpen,https://live.musopen.org:8085/streamvbr0?1699850989890,United States,Classical Opera and Culture
+
+# --- DELETE examples ------------------------------------------------
+# Remove presets 14 and 15 if present:
+-14
+-15
+
+# Run with:  .oceaneyes/bin/python3 favsync.py favsync.example.txt --dry-run
+# Go live:   .oceaneyes/bin/python3 favsync.py favsync.example.txt
